@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import PhoneForm from './components/PhoneForm';
+import PhoneList from './components/PhoneList';
 
 function App() {
+  const [phoneNumbers, setPhoneNumbers] = useState([
+    {
+      firstName: 'Jane',
+      lastName: 'Doe',
+      phone: '123-456-7891',
+    },
+  ]);
+
+  const handleSubmit = (newNumber) => {
+    setPhoneNumbers([...phoneNumbers, newNumber]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h2>Phone Book</h2>
+      <PhoneForm onSubmit={handleSubmit} />
+      <PhoneList phoneNumbers={phoneNumbers} />
     </div>
   );
 }
